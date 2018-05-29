@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import numpy as np
-from ops import compute, prepareData, energy
+from ops.core.main import energyAndJacobian, energy
+from ops.core.fileio import prepareData
 
 # Test the compute function
-conn, x = prepareData('T7.vtk')
+conn, x = prepareData('../data/T7.vtk')
 Jn = np.zeros_like(x)
-_,Ja = compute(x,conn)
+_,Ja = energyAndJacobian(x,conn)
 hv = np.logspace(-12,-3,20)
 for h in hv:
     for i in range(len(x)):
